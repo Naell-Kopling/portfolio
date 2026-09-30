@@ -500,7 +500,7 @@ body {
 }
 
 /* Mobile */
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .nav-links {
     display: none;
   }
@@ -652,7 +652,7 @@ body {
 .tag-marvel { background: rgba(239, 68, 68, 0.15); color: #f87171; }
 
 /* Mobile responsive */
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .about-grid-new {
     grid-template-columns: 1fr;
   }
