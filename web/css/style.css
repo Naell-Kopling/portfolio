@@ -63,7 +63,7 @@ body {
 }
 
 .logo-img {
-  height: 100px;
+  height: 40px;
   width: auto;
 }
 
@@ -557,7 +557,7 @@ body {
 
 .about-grid-new {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 
@@ -597,7 +597,9 @@ body {
 }
 
 /* Story card - spans 2 columns */
-.about-story { }
+.about-story {
+  grid-column: span 2;
+}
 
 /* Quote card */
 .about-quote {
@@ -653,7 +655,7 @@ body {
 @media (max-width: 480px) {
   .about-grid-new {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
   
