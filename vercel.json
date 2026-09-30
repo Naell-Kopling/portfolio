@@ -1,5 +1,6 @@
 {
+  "outputDirectory": "web",
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/backend/app/main.py" }
+    { "source": "/api/(.*)", "destination": "https://naell-api.vercel.app/api/$1" }
   ]
 }
