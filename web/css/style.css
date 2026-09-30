@@ -653,13 +653,7 @@ body {
 
 /* Mobile responsive */
 @media (max-width: 480px) {
-  .about-grid-new {
-    grid-template-columns: 1fr;
-  }
-  
-  .about-story {
-    grid-column: span 1;
-  }
+
   
   .about-lead {
     font-size: 20px;
