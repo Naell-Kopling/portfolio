@@ -11,6 +11,7 @@ class Profile(Base):
     email = Column(String(200))
     github = Column(String(200))
     linkedin = Column(String(200))
+    instagram = Column(String(200))
     avatar_url = Column(String(500))
 
 

@@ -15,8 +15,9 @@ db.add(Profile(
     name="Leonardo",
     title="Software Developer",
     bio="BINUS University student passionate about building modern software solutions.",
-    email="leonardo@example.com",
+    email="joshua.natanael@binus.ac.id",
     github="https://github.com/Naell-Kopling",
+    instagram="@xyznaell_",
 ))
 
 db.add_all([

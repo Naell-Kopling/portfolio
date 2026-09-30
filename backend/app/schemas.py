@@ -9,6 +9,7 @@ class ProfileBase(BaseModel):
     github: str | None = None
     linkedin: str | None = None
     avatar_url: str | None = None
+    instagram: str | None = None
 
 class ProfileResponse(ProfileBase):
     id: int

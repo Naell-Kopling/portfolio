@@ -47,6 +47,7 @@ class ProfileHeader extends StatelessWidget {
             children: [
               if (profile.email != null && profile.email!.isNotEmpty) _chip(context, Icons.alternate_email, profile.email!),
               if (profile.github != null && profile.github!.isNotEmpty) _chip(context, Icons.code, 'GitHub'),
+              if (profile.instagram != null && profile.instagram!.isNotEmpty) _chip(context, Icons.camera_alt_outlined, profile.instagram!),
             ],
           ),
         ],
