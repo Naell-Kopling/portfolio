@@ -1,5 +1,4 @@
 {
-  "outputDirectory": "web",
   "rewrites": [
     { "source": "/api/(.*)", "destination": "https://naell-api.vercel.app/api/$1" }
   ]
