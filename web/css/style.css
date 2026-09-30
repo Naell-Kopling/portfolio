@@ -654,10 +654,8 @@ body {
 /* Mobile responsive */
 @media (max-width: 480px) {
   .about-grid-new {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
+    grid-template-columns: 1fr;
+  }
   
   .about-story {
     grid-column: span 1;
