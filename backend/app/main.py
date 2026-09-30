@@ -1,14 +1,13 @@
 import os
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from mangum import Mangum
 from app.database import engine, Base, SessionLocal
 from app.routers import profile, projects, skills, experience
 from app import models
 
-Base.metadata.create_all(bind=engine)
-
-# Auto-seed on Vercel
-if os.environ.get("VERCEL"):
+def seed_db():
     db = SessionLocal()
     if not db.query(models.Profile).first():
         db.add(models.Profile(name="Leonardo", title="Software Developer", bio="BINUS University student passionate about building modern software solutions.", email="joshua.natanael@binus.ac.id", github="https://github.com/Naell-Kopling", instagram="@xyznaell_"))
@@ -22,18 +21,24 @@ if os.environ.get("VERCEL"):
             models.Skill(name="Flutter", category="Framework", level=50),
             models.Skill(name="HTML/CSS", category="Frontend", level=65),
             models.Skill(name="JavaScript", category="Language", level=55),
-            models.Skill(name="Git", category="Tool", level=65),
+models.Skill(name="Git", category="Tool", level=65),
         ])
         db.add(models.Experience(role="Student", company="BINUS University Online", period="Current", description="Undergraduate student studying software engineering"))
         db.commit()
     db.close()
 
-app = FastAPI(title="Leonardo Portfolio API", version="1.0.0")
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    Base.metadata.create_all(bind=engine)
+    seed_db()
+    yield
+
+app = FastAPI(title="Leonardo Portfolio API", version="1.0.0", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-allow_credentials=True,
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -46,3 +51,9 @@ app.include_router(experience.router, prefix="/api/experience", tags=["Experienc
 @app.get("/")
 def root():
     return {"message": "Leonardo Portfolio API", "docs": "/docs"}
+
+@app.get("/api")
+def api_root():
+    return {"message": "Leonardo Portfolio API", "docs": "/docs"}
+
+handler = Mangum(app)
