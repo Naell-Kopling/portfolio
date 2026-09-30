@@ -63,7 +63,7 @@ body {
 }
 
 .logo-img {
-  height: 40px;
+  height: 36px;
   width: auto;
 }
 
@@ -396,7 +396,7 @@ body {
   align-items: center;
   justify-content: center;
   width: 36px;
-  height: 100px;
+  height: 36px;
   background: rgba(230, 57, 70, 0.1);
   color: var(--accent);
   font-size: 14px;
@@ -500,7 +500,7 @@ body {
 }
 
 /* Mobile */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .nav-links {
     display: none;
   }
@@ -652,11 +652,16 @@ body {
 .tag-marvel { background: rgba(239, 68, 68, 0.15); color: #f87171; }
 
 /* Mobile responsive */
-@media (max-width: 480px) {
-
+@media (max-width: 768px) {
+  .about-grid-new {
+    grid-template-columns: 1fr;
+  }
+  
+  .about-story {
+    grid-column: span 1;
+  }
   
   .about-lead {
     font-size: 20px;
   }
 }
-/* force rebuild 1790779705 */
