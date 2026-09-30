@@ -541,3 +541,127 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* About Section - New Design */
+.about-intro {
+  margin-bottom: 48px;
+}
+
+.about-lead {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.4;
+  max-width: 600px;
+}
+
+.about-grid-new {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.about-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  transition: all 0.3s ease;
+}
+
+.about-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+}
+
+.card-icon {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+.about-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+
+.about-card p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.about-card strong {
+  color: var(--accent);
+}
+
+/* Story card - spans 2 columns */
+.about-story {
+  grid-column: span 2;
+}
+
+/* Quote card */
+.about-quote {
+  background: linear-gradient(135deg, rgba(230, 57, 70, 0.1), transparent);
+  border-color: rgba(230, 57, 70, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.quote-mark {
+  font-size: 48px;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 8px;
+  font-family: Georgia, serif;
+}
+
+.about-quote blockquote {
+  font-size: 16px;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.about-quote cite {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Interest tags */
+.interest-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag {
+  padding: 8px 14px;
+  background: var(--bg);
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.tag-game { background: rgba(99, 102, 241, 0.15); color: #818cf8; }
+.tag-race { background: rgba(234, 179, 8, 0.15); color: #fbbf24; }
+.tag-marvel { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .about-grid-new {
+    grid-template-columns: 1fr;
+  }
+  
+  .about-story {
+    grid-column: span 1;
+  }
+  
+  .about-lead {
+    font-size: 20px;
+  }
+}
