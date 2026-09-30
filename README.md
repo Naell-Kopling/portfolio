@@ -1,38 +1,24 @@
 # Leonardo's Portfolio
 
+🌐 **Live Website:** [naell-portofolio.vercel.app](https://naell-portofolio.vercel.app)
+
 Modern minimalist portfolio with black & red theme.
 
-## Structure
+## Links
 
-```
-portfolio/
-├── backend/    # FastAPI REST API
-├── web/        # Static website (HTML/CSS/JS)
-└── mobile/     # Flutter mobile app
-```
+- **Website:** https://naell-portofolio.vercel.app
+- **API:** https://naell-api.vercel.app/docs
 
-## Quick Start
+## Tech Stack
 
-### Backend
-```bash
-cd backend
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-python seed.py
-uvicorn app.main:app --reload
-```
-API docs: http://localhost:8000/docs
+| Component | Technology |
+|-----------|------------|
+| Backend | Python, FastAPI |
+| Web | HTML, CSS, JavaScript |
+| Mobile | Dart, Flutter |
 
-### Web
-Open `web/index.html` in browser, or serve with:
-```bash
-cd web && python3 -m http.server 3000
-```
+## Contact
 
-### Mobile
-```bash
-cd mobile
-flutter pub get
-flutter run
-```
+- Email: joshua.natanael@binus.ac.id
+- GitHub: [@Naell-Kopling](https://github.com/Naell-Kopling)
+- Instagram: [@xyznaell_](https://instagram.com/xyznaell_)
