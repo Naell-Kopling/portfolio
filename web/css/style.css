@@ -63,7 +63,7 @@ body {
 }
 
 .logo-img {
-  height: 48px;
+  height: 70px;
   width: auto;
 }
 
@@ -396,7 +396,7 @@ body {
   align-items: center;
   justify-content: center;
   width: 36px;
-  height: 48px;
+  height: 70px;
   background: rgba(230, 57, 70, 0.1);
   color: var(--accent);
   font-size: 14px;
