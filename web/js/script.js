@@ -1,4 +1,4 @@
-const API_BASE = 'https://portfolio-backend-naell.vercel.app/api';
+const API_BASE = '/api';
 
 // Fetch skills
 async function loadSkills() {
