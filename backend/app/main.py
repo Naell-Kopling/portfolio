@@ -14,6 +14,7 @@ def seed_db():
         db.add_all([
             models.Project(title="Portfolio App", description="Full-stack portfolio with FastAPI, Web & Flutter", tech_stack="Python, FastAPI, Flutter, HTML/CSS", github_url="https://github.com/Naell-Kopling/portfolio"),
             models.Project(title="Hermes Coding Lab", description="Coding experiments and learning projects", tech_stack="Python", github_url="https://github.com/Naell-Kopling/hermes-coding-lab"),
+            models.Project(title="Time Capsule API", description="Messages that reveal at a future date", tech_stack="Python, FastAPI, SQLite", github_url="https://github.com/Naell-Kopling/time-capsule-api"),
         ])
         db.add_all([
             models.Skill(name="Python", category="Language", level=70),
