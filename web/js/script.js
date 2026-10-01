@@ -1,75 +1,30 @@
-const API_BASE = 'https://naell-api.vercel.app/api';
+const API = 'https://naell-api.vercel.app/api';
 
-// Fetch skills
-async function loadSkills() {
+// ponytail: one fetch helper, no abstraction needed yet
+const load = async (endpoint, el, render) => {
   try {
-    const res = await fetch(`${API_BASE}/skills/`);
-    const skills = await res.json();
-    const grid = document.getElementById('skills-grid');
-    
-    grid.innerHTML = skills.map(skill => `
-      <div class="skill-card">
-        <div class="skill-name">${skill.name}</div>
-        <div class="skill-category">${skill.category || 'Skill'}</div>
-        <div class="skill-bar">
-          <div class="skill-bar-fill" style="width: ${skill.level}%"></div>
-        </div>
-      </div>
-    `).join('');
-  } catch (e) {
-    document.getElementById('skills-grid').innerHTML = '<p style="color: var(--text-muted)">Unable to load skills. Make sure backend is running.</p>';
-  }
-}
+    const data = await (await fetch(`${API}/${endpoint}/`)).json();
+    el.innerHTML = data.map(render).join('');
+  } catch { el.innerHTML = '<p class="error">Failed to load</p>'; }
+};
 
-// Fetch projects
-async function loadProjects() {
-  try {
-    const res = await fetch(`${API_BASE}/projects/`);
-    const projects = await res.json();
-    const grid = document.getElementById('projects-grid');
-    
-    grid.innerHTML = projects.map((project, i) => `
-      <div class="project-card">
-        <div class="project-num">${String(i + 1).padStart(2, '0')}</div>
-        <h3 class="project-title">${project.title}</h3>
-        <p class="project-desc">${project.description || ''}</p>
-        <div class="project-tech">
-          ${(project.tech_stack || '').split(',').map(t => `<span>${t.trim()}</span>`).join('')}
-        </div>
-        ${project.github_url ? `<a href="${project.github_url}" target="_blank" class="project-link">View on GitHub →</a>` : ''}
-      </div>
-    `).join('');
-  } catch (e) {
-    document.getElementById('projects-grid').innerHTML = '<p style="color: var(--text-muted)">Unable to load projects. Make sure backend is running.</p>';
-  }
-}
-
-// Smooth scroll for nav links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
-});
-
-// Intersection Observer for animations
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.section').forEach(section => {
-  observer.observe(section);
-});
-
-// Load data
 document.addEventListener('DOMContentLoaded', () => {
-  loadSkills();
-  loadProjects();
+  load('skills', document.getElementById('skills-grid'), s => `
+    <div class="skill-card">
+      <span class="skill-name">${s.name}</span>
+      <span class="skill-level">${s.level}%</span>
+      <div class="skill-bar"><div style="width:${s.level}%"></div></div>
+    </div>`);
+  
+  load('projects', document.getElementById('projects-grid'), (p,i) => `
+    <article class="project-card">
+      <span class="project-num">${String(i+1).padStart(2,'0')}</span>
+      <h3>${p.title}</h3>
+      <p>${p.description || ''}</p>
+      <div class="tags">${(p.tech_stack||'').split(',').map(t=>`<span>${t.trim()}</span>`).join('')}</div>
+      ${p.github_url ? `<a href="${p.github_url}" target="_blank">View Code →</a>` : ''}
+    </article>`);
 });
+
+// ponytail: smooth scroll via CSS scroll-behavior, no JS needed
+// ponytail: intersection observer removed, CSS handles animations
