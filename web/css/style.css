@@ -94,6 +94,20 @@ body {
   overflow: hidden;
 }
 
+/* Cursor glow: follower only, native cursor untouched (taste-skill: no cursor replacement) */
+.cursor-glow {
+  position: fixed;
+  top: 0; left: 0;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(230,57,70,.10), transparent 70%);
+  pointer-events: none;
+  z-index: 98;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+@media (hover: none), (prefers-reduced-motion: reduce) { .cursor-glow { display: none; } }
+
 .hero::before {
   content: '';
   position: absolute;

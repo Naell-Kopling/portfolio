@@ -25,6 +25,22 @@ document.addEventListener('DOMContentLoaded', () => {
       ${p.github_url ? `<a href="${p.github_url}" target="_blank" rel="noopener">View Code →</a>` : ''}
     </article>`);
 
+  // cursor glow: lerp follower, skip on touch / reduced motion
+  // ponytail: rAF + transform only, no per-frame layout reads beyond x/y
+  if (matchMedia('(hover: hover) and (prefers-reduced-motion: no-preference)').matches) {
+    const glow = document.createElement('div');
+    glow.className = 'cursor-glow';
+    document.body.appendChild(glow);
+    let gx = -300, gy = -300, cx = -300, cy = -300;
+    addEventListener('pointermove', e => { cx = e.clientX; cy = e.clientY; });
+    (function tick() {
+      gx += (cx - gx) * 0.12;
+      gy += (cy - gy) * 0.12;
+      glow.style.transform = `translate(${gx - 150}px, ${gy - 150}px)`;
+      requestAnimationFrame(tick);
+    })();
+  }
+
   // active nav link per visible section
   const navio = new IntersectionObserver(es => es.forEach(e => {
     if (e.isIntersecting) document.querySelectorAll('.nav-links a').forEach(a =>
