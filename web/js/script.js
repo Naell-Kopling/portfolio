@@ -15,16 +15,25 @@ document.addEventListener('DOMContentLoaded', () => {
       <span class="skill-level">${s.level}%</span>
       <div class="skill-bar"><div style="width:${s.level}%"></div></div>
     </div>`);
-  
+
   load('projects', document.getElementById('projects-grid'), (p,i) => `
     <article class="project-card">
       <span class="project-num">${String(i+1).padStart(2,'0')}</span>
       <h3>${p.title}</h3>
       <p>${p.description || ''}</p>
       <div class="tags">${(p.tech_stack||'').split(',').map(t=>`<span>${t.trim()}</span>`).join('')}</div>
-      ${p.github_url ? `<a href="${p.github_url}" target="_blank">View Code →</a>` : ''}
+      ${p.github_url ? `<a href="${p.github_url}" target="_blank" rel="noopener">View Code →</a>` : ''}
     </article>`);
-});
 
-// ponytail: smooth scroll via CSS scroll-behavior, no JS needed
-// ponytail: intersection observer removed, CSS handles animations
+  // scroll reveal: one observer, CSS does the rest
+  // ponytail: global observer, per-element unobserve is enough here
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) {
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    }), { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+  }
+});
