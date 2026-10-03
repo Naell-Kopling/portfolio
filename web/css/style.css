@@ -42,6 +42,11 @@ body {
 
 .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
 
+::selection { background: var(--accent); color: #fff; }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-thumb { background: #222; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
 /* Nav */
 .nav {
   position: fixed;
@@ -66,6 +71,7 @@ body {
 
 .nav-links { display: flex; gap: 28px; }
 .nav-links a {
+  font-family: var(--font-mono);
   color: var(--text-dim);
   text-decoration: none;
   font-size: 13px;
@@ -74,6 +80,7 @@ body {
   transition: color .2s;
 }
 .nav-links a:hover { color: var(--accent); }
+.nav-links a.active { color: var(--text); }
 
 .nav-toggle { display: none; }
 
@@ -85,6 +92,19 @@ body {
   padding: 120px 24px 80px;
   position: relative;
   overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(245,245,245,.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245,245,245,.028) 1px, transparent 1px);
+  background-size: 48px 48px;
+  -webkit-mask-image: radial-gradient(ellipse at 30% 40%, #000 20%, transparent 70%);
+  mask-image: radial-gradient(ellipse at 30% 40%, #000 20%, transparent 70%);
+  pointer-events: none;
 }
 
 .hero::after {
@@ -316,6 +336,11 @@ body {
   gap: 20px;
 }
 
+/* UUPM portfolio-grid: featured first tile for rhythm */
+@media (min-width: 720px) {
+  .projects-grid .project-card:first-child { grid-column: span 2; }
+}
+
 .project-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -368,7 +393,15 @@ body {
 .project-card a:hover { text-decoration: underline; }
 
 /* Contact */
-.contact-content { text-align: center; max-width: 480px; margin: 0 auto; }
+.contact-content {
+  text-align: center;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 48px 36px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
 .contact-content > p { font-size: 16px; color: var(--text-dim); margin-bottom: 28px; }
 
 .contact-links { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
@@ -420,5 +453,7 @@ body {
   .about-grid-new { grid-template-columns: 1fr; }
   .about-story { grid-column: span 1; }
   .projects-grid { grid-template-columns: 1fr; }
+  .projects-grid .project-card:first-child { grid-column: span 1; }
+  .contact-content { padding: 36px 24px; }
   .contact-links { flex-direction: column; align-items: center; }
 }

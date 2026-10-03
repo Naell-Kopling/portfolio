@@ -25,6 +25,13 @@ document.addEventListener('DOMContentLoaded', () => {
       ${p.github_url ? `<a href="${p.github_url}" target="_blank" rel="noopener">View Code →</a>` : ''}
     </article>`);
 
+  // active nav link per visible section
+  const navio = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) document.querySelectorAll('.nav-links a').forEach(a =>
+      a.classList.toggle('active', a.hash === '#' + e.target.id));
+  }), { rootMargin: '-40% 0px -55% 0px' });
+  document.querySelectorAll('section[id]').forEach(sec => navio.observe(sec));
+
   // scroll reveal: one observer, CSS does the rest
   // ponytail: global observer, per-element unobserve is enough here
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
