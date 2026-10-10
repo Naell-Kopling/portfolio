@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.database import get_db
 from app import models, schemas
+from app.auth import require_admin
 
 router = APIRouter()
 
@@ -13,7 +14,7 @@ def get_profile(db: Session = Depends(get_db)):
     return profile
 
 @router.put("/", response_model=schemas.ProfileResponse)
-def update_profile(data: schemas.ProfileBase, db: Session = Depends(get_db)):
+def update_profile(data: schemas.ProfileBase, db: Session = Depends(get_db), _=Depends(require_admin)):
     profile = db.query(models.Profile).first()
     if not profile:
         profile = models.Profile(**data.model_dump())

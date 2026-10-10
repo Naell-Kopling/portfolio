@@ -34,14 +34,21 @@ async def lifespan(app: FastAPI):
     seed_db()
     yield
 
-app = FastAPI(title="Leonardo Portfolio API", version="1.0.0", lifespan=lifespan)
+app = FastAPI(
+    title="Leonardo Portfolio API",
+    version="1.0.0",
+    lifespan=lifespan,
+    docs_url=None if os.getenv("ADMIN_API_KEY") else "/docs",
+    redoc_url=None,
+    openapi_url=None if os.getenv("ADMIN_API_KEY") else "/openapi.json",
+)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=["https://naell-portofolio.vercel.app"],
+    allow_credentials=False,
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["X-API-Key", "Content-Type"],
 )
 
 app.include_router(profile.router, prefix="/api/profile", tags=["Profile"])
